@@ -47,12 +47,20 @@ class PlexLogin {
             return false;
 
         if ($xml['authenticationToken']) {
-            $this->authToken = $xml['authenticationToken'];
+            $this->username = sprintf("%s", $xml['username']);
+            $this->authToken = sprintf("%s", $xml['authenticationToken']);
 
             return true;
         }
 
         return false;
+    }
+
+    public function getUsername() {
+        if (!$this->isLoggedIn())
+            return false;
+
+        return $this->username;
     }
 
     public function getServers() {
