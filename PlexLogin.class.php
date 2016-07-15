@@ -10,6 +10,19 @@ class PlexLogin {
 
     private $authToken = null;
 
+    private $clientId = null;
+
+    private $properties = array(
+        'deviceName' => 'PlexLogin',
+        'product' => 'PlexLogin',
+        'version' => '0.3',
+        'platform' => array(
+            'name' => 'PlexLogin',
+            'version' => '0.3'
+        ),
+        'clientIdentifier' => 'PlexLogin/0.3'
+    );
+
     public function __construct($username, $password) {
         $this->username = $username;
         $this->password = $password;
@@ -26,12 +39,12 @@ class PlexLogin {
         curl_setopt($ch, CURLOPT_POST, 1);
         curl_setopt($ch, CURLOPT_HTTPHEADER, array(
             'Content-Type: application/xml; charset=utf-8',
-            'X-Plex-Device-Name: PlexLogin',
-            'X-Plex-Product: PlexLogin',
-            'X-Plex-Version: 0.1',
-            'X-Plex-Platform: PlexLogin',
-            'X-Plex-Platform-Version: 0.1',
-            'X-Plex-Client-Identifier: PlexLogin/' . uniqid(),
+            'X-Plex-Device-Name: ' . $this->properties['deviceName'],
+            'X-Plex-Product: ' . $this->properties['product'],
+            'X-Plex-Version: ' . $this->properties['version'],
+            'X-Plex-Platform: ' . $this->properties['platform']['name'],
+            'X-Plex-Platform-Version: ' . $this->properties['platform']['version'],
+            'X-Plex-Client-Identifier: ' . $this->properties['clientIdentifier'],
             'Authorization: Basic ' . base64_encode($this->username . ':' . $this->password)
         ));
 
@@ -61,6 +74,18 @@ class PlexLogin {
             return false;
 
         return $this->username;
+    }
+
+    public function getProperties() {
+        return $properties;
+    }
+
+    public function setProperties($properties) {
+        $this->properties = $properties;
+    }
+
+    public function setProperty($key, $value) {
+        $this->properties[$key] = $value;
     }
 
     public function getServers() {
