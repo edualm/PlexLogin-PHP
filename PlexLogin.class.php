@@ -61,6 +61,7 @@ class PlexLogin {
 
         if ($xml['authenticationToken']) {
             $this->username = sprintf("%s", $xml['username']);
+            $this->email = sprintf("%s", $xml['email']);
             $this->authToken = sprintf("%s", $xml['authenticationToken']);
 
             return true;
@@ -74,6 +75,13 @@ class PlexLogin {
             return false;
 
         return $this->username;
+    }
+
+    public function getEmail() {
+        if (!$this->isLoggedIn())
+            return false;
+
+        return $this->email;
     }
 
     public function getProperties() {
