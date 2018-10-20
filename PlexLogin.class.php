@@ -15,12 +15,12 @@ class PlexLogin {
     private $properties = array(
         'deviceName' => 'PlexLogin',
         'product' => 'PlexLogin',
-        'version' => '0.3',
+        'version' => '0.4',
         'platform' => array(
             'name' => 'PlexLogin',
-            'version' => '0.3'
+            'version' => '0.4'
         ),
-        'clientIdentifier' => 'PlexLogin/0.3'
+        'clientIdentifier' => 'PlexLogin/0.4'
     );
 
     public function __construct($username, $password) {
