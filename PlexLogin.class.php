@@ -46,7 +46,7 @@ class PlexLogin {
             'X-Plex-Platform: ' . $this->properties['platform']['name'],
             'X-Plex-Platform-Version: ' . $this->properties['platform']['version'],
             'X-Plex-Client-Identifier: ' . $this->properties['clientIdentifier'],
-            'Authorization: Basic ' . base64_encode($this->username . ':' . ($this->password + ($this->totp ?? "")))
+            'Authorization: Basic ' . base64_encode($this->username . ':' . ($this->password . ($this->totp ?? "")))
         ));
 
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
