@@ -15,17 +15,18 @@ class PlexLogin {
     private $properties = array(
         'deviceName' => 'PlexLogin',
         'product' => 'PlexLogin',
-        'version' => '0.4',
+        'version' => '0.5',
         'platform' => array(
             'name' => 'PlexLogin',
-            'version' => '0.4'
+            'version' => '0.5'
         ),
-        'clientIdentifier' => 'PlexLogin/0.4'
+        'clientIdentifier' => 'PlexLogin/0.5'
     );
 
-    public function __construct($username, $password) {
+    public function __construct($username, $password, $totp = null) {
         $this->username = $username;
         $this->password = $password;
+        $this->totp = $totp;
     }
 
     public function isLoggedIn() {
@@ -45,7 +46,7 @@ class PlexLogin {
             'X-Plex-Platform: ' . $this->properties['platform']['name'],
             'X-Plex-Platform-Version: ' . $this->properties['platform']['version'],
             'X-Plex-Client-Identifier: ' . $this->properties['clientIdentifier'],
-            'Authorization: Basic ' . base64_encode($this->username . ':' . $this->password)
+            'Authorization: Basic ' . base64_encode($this->username . ':' . ($this->password + ($this->totp ?? "")))
         ));
 
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
