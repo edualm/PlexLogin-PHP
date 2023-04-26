@@ -5,10 +5,16 @@ A simple PHP class that allows you to authenticate against the Plex.tv servers u
 
 Usage example:
 
-    $pl = new PlexLogin('username', 'password');
-  
+    <?php
+
+    require_once('PlexLogin.class.php');
+
+    $pl = new PlexLogin('username', 'password', 'totp');
+
     if ($pl->login()) {
       print_r($pl->getServers());
     } else {
-      echo 'Login failed.'
+      echo 'Login failed.';
     }
+    
+    ?>
